@@ -1,0 +1,6 @@
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\bin\MIConvexHull.dll
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\bin\MIConvexHull.pdb
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\bin\MIConvexHull.xml
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\MIConvexHull\obj\Debug\MIConvexHull.csprojResolveAssemblyReference.cache
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\MIConvexHull\obj\Debug\MIConvexHull.dll
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\MIConvexHull\obj\Debug\MIConvexHull.pdb

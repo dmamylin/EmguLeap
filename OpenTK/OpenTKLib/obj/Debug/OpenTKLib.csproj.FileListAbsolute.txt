@@ -1,0 +1,12 @@
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKLib\obj\Debug\OpenTKLib.csprojResolveAssemblyReference.cache
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKLib\obj\Debug\OpenTKLib.OpenTKTestForm.resources
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKLib\obj\Debug\OpenTKLib.AboutForm.resources
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKLib\obj\Debug\OpenTKLib.SettingsForm.resources
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKLib\obj\Debug\OpenTKLib.Properties.Resources.resources
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKLib\obj\Debug\OpenTKLib.OpenGLControl.resources
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKLib\obj\Debug\OpenTKLib.csproj.GenerateResource.Cache
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\bin\OpenTKLib.dll.config
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\bin\OpenTKLib.dll
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\bin\OpenTKLib.pdb
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKLib\obj\Debug\OpenTKLib.dll
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKLib\obj\Debug\OpenTKLib.pdb

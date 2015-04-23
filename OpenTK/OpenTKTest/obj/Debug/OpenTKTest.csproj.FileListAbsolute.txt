@@ -1,0 +1,5 @@
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKTest\obj\Debug\OpenTKTest.csprojResolveAssemblyReference.cache
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\bin\OpenTKTestApp.exe
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\bin\OpenTKTestApp.pdb
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKTest\obj\Debug\OpenTKTestApp.exe
+C:\Users\Dmitry\Desktop\EmguLeap\OpenTK\OpenTKTest\obj\Debug\OpenTKTestApp.pdb

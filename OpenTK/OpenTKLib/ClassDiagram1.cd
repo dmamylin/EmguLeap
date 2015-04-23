@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OpenTKLib.Model3D" Collapsed="true">
+    <Position X="1.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GFAlGA6CEr0EMvUUQBEAGESIEIcJCpIkARBkAKdWAgo=</HashCode>
+      <FileName>Models\Model3D_IO_Read.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenTKLib.OpenGLControl" Collapsed="true">
+    <Position X="1" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BcUNFAEigG4UMXUoEETjgyKWQ4CQEACYGOwgEI0pIJQ=</HashCode>
+      <FileName>UserControl\_OpenGLControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenTKLib.OpenTKTestForm" Collapsed="true">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAICAEAEAIAACAgAgCAgAAAAACAAQAAAAAAAA=</HashCode>
+      <FileName>Forms\OpenTKTestForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenTKLib.Vertex" Collapsed="true">
+    <Position X="2.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAEAAAAAAAAIAAIEAAAAAQgAAAAABAAAAEAggAAAAAA=</HashCode>
+      <FileName>Geometry\Vertex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenTKLib.OpenGLRenderer" Collapsed="true">
+    <Position X="1" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBgAgWAEhDACAgiTIAAYBghERABUAAgQAEEFIgAAIAA=</HashCode>
+      <FileName>UserControl\OpenGLRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
