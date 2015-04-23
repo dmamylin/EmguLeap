@@ -19,6 +19,7 @@ namespace EmguLeap
 			InitializeComponent();
 			settings.Visible = true;
 			distances.Visible = true;
+			GLTestForm.Visible = true;
 		}
 
 		public void ChangeImages(Bitmap[] images)
