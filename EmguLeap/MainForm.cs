@@ -37,8 +37,14 @@ namespace EmguLeap
 					var middleX = disparity.Image.Width/2;
 					var middleY = disparity.Image.Height/2;
 
-					var distance = new DistanceCalculator((Bitmap)disparity.Image).GetDistance(middleX, middleY);
-					distances.UpdateDistanceToCenter(distance);
+					var distanceCalculator = new DistanceCalculator((Bitmap)disparity.Image);
+					distances.UpdateDistanceToCenter(distanceCalculator.GetDistance(middleX, middleY));
+
+					var vertices = distanceCalculator.ToVertexList();
+					var colors = new byte[vertices.Count];
+					for (var i = 0; i < colors.Length; i++)
+						colors[i] = 240;
+					GLTestForm.ShowListOfVertices(vertices, colors);
 				}));
 		}
 

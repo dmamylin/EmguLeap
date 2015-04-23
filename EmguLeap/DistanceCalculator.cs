@@ -1,8 +1,11 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Xml.Linq;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
+using OpenTKLib;
 
 namespace EmguLeap
 {
@@ -32,6 +35,11 @@ namespace EmguLeap
 				outFile.WriteLine("v " + point.x + " " + point.y + " " + point.z);
 
 			outFile.Close();
+		}
+
+		public List<Vertex> ToVertexList()
+		{
+			return Map3D.Select(point => new Vertex(point.x, point.y, point.z)).ToList();
 		}
 
 		public float GetDistance(int x, int y)
