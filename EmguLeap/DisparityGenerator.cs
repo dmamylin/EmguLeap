@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using Emgu.CV;
+using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.Util;
 
@@ -70,7 +71,12 @@ namespace EmguLeap
 			//	stereoSolver.FindStereoCorrespondence(left, right, disparityMap);
 			//}
 
-			return disparityMap.ToBitmap();
+			//normalize(disp, disp8, 0, 255, CV_MINMAX, CV_8U);
+
+			var newDisp = disparityMap.Clone();
+			CvInvoke.cvNormalize(disparityMap, newDisp, 0, 255, NORM_TYPE.CV_MINMAX, IntPtr.Zero);
+			//return disparityMap.ToBitmap();
+			return newDisp.ToBitmap();
 
 
 			//using (StereoSGBM solver = new StereoSGBM(-64,

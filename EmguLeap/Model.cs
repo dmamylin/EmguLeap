@@ -1,70 +1,60 @@
 ﻿using System;
 using System.Drawing;
-using OpenTKLib;
 
 namespace EmguLeap
 {
 	class Model
 	{
+		private readonly Settings SettingsForm;
+		private readonly ImageForm ImageForm;
+		private readonly Distances DistancesForm;
+
+		private readonly DisparityGenerator DisparityGenerator;
+		private readonly ImageProvider ImageProvider;
+		private readonly MatrixLoader MatrixLoader;
+
 		public Model()
 		{
-			imageForm = new ImageForm();
-			settingsForm = new Settings();
-			//distancesForm = new Distances();
-			//GLTestForm = new OpenTKTestForm();
+			ImageForm = new ImageForm();
+			SettingsForm = new Settings();
+			DistancesForm = new Distances();
 
-			provider = new ImageProvider();
-			generator = new DisparityGenerator();
+			ImageProvider = new ImageProvider();
+			DisparityGenerator = new DisparityGenerator();
 			MatrixLoader = new MatrixLoader();
 		}
 
 		public void Run()
 		{
-			provider.AddNewAction(ChangeImages);
+			ImageProvider.AddNewAction(ChangeImages);
+			ImageProvider.AddNewAction(MeasureDistance);
 
-			imageForm.Visible = true;
-			settingsForm.Visible = true;
+			ImageForm.Visible = true;
+			SettingsForm.Visible = true;
+		}
+
+		public void MeasureDistance(Bitmap[] images)
+		{
+			var disparity = DisparityGenerator.CalculateDisparity(images[0], images[1], SettingsForm.Options);
+			var middlePoint = new Point(disparity.Width/2, disparity.Height/2);
+			var distanceCalculator = new DistanceCalculator(disparity, MatrixLoader.Q);
+
+			DistancesForm.UpdateDistanceToCenter(distanceCalculator.GetDistanceToPoint(middlePoint));
+
+			/*var vertices = distanceCalculator.ToVertexList();
+			var colors = new byte[vertices.Count];
+			for (var i = 0; i < colors.Length; i++)
+				colors[i] = 240;
+			GLTestForm.ShowListOfVertices(vertices, colors);*/
 		}
 
 		public void ChangeImages(Bitmap[] images)
 		{
 			Console.WriteLine("Changing images.");
-			var leftIm = images[0];
-			var rightIm = images[1];
-			var options = settingsForm.Options;
-			var disparityIm = generator.CalculateDisparity(leftIm, rightIm, settingsForm.Options);
+			var disparityIm = DisparityGenerator.CalculateDisparity(images[0], images[1], SettingsForm.Options);
 
-			imageForm.ChangeImages(new[] { leftIm, rightIm, disparityIm });
+			ImageForm.ChangeImages(new[] { images[0], images[1], disparityIm });
 			Console.WriteLine("Images changed.");
-			//if (IsHandleCreated)
-			//	Invoke(new Action(() =>
-			//	{
-			//		left.Image = leftIm;
-			//		right.Image = rightIm;
-			//		disparity.Image = generator.CalculateDisparity(leftIm, rightIm, settings.GetOptions());
-
-			//		var middleX = disparity.Image.Width / 2;
-			//		var middleY = disparity.Image.Height / 2;
-
-			//		var distanceCalculator = new DistanceCalculator((Bitmap)disparity.Image);
-			//		distances.UpdateDistanceToCenter(distanceCalculator.GetDistance(middleX, middleY));
-
-			//		var vertices = distanceCalculator.ToVertexList();
-			//		var colors = new byte[vertices.Count];
-			//		for (var i = 0; i < colors.Length; i++)
-			//			colors[i] = 240;
-			//		GLTestForm.ShowListOfVertices(vertices, colors);
-			//	}));
 		}
-
-		private Settings settingsForm;
-		private ImageForm imageForm;
-		private Distances distancesForm;
-		private OpenTKTestForm GLTestForm;
-
-		private DisparityGenerator generator;
-		private ImageProvider provider;
-		private MatrixLoader MatrixLoader;
-
 	}
 }
