@@ -9,19 +9,22 @@ namespace EmguLeap
 			InitializeComponent();
 		}
 
-		public DisparityOptions GetOptions()
+		public DisparityOptions Options
 		{
-			var options = new DisparityOptions(
-				 numDisp.Value * 16,
-				 minDisp.Value * 5,
-				 SAD.Value * 2 + 1,
-				  disp12.Value,
-				  preFilter.Value,
-				  uniqueness.Value + 5,
-				  speckle.Value * 16,
-				  speckleRange.Value * 16
-				);
-			return options;
+			get
+			{
+				return  new DisparityOptions(
+				 numDisp.GetData() * 16,
+				 minDisp.GetData() * 5,
+				 SAD.GetData() * 2 + 1,
+				  disp12.GetData(),
+				  preFilter.GetData(),
+				  uniqueness.GetData() + 5,
+				  speckle.GetData() * 16,
+				  speckleRange.GetData() * 16);
+			}
+		}
+		
 			//options.numDisparities = numDisp.Value * 16;
 			/////*This is maximum disparity minus minimum disparity. Always greater than 0. In the current implementation this parameter must be divisible by 16.*/
 			////int numDisparities = GetSliderValue(Num_Disparities);
@@ -64,7 +67,5 @@ namespace EmguLeap
 			//// * which is large for 640x480 stereo and huge for HD-size pictures. By default this is usually false*/
 			//////Set globally for ease
 			//////bool fullDP = true;
-
-		}
 	}
 }

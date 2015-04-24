@@ -32,7 +32,7 @@ namespace EmguLeap
 				{
 					left.Image = leftIm;
 					right.Image = rightIm;
-					disparity.Image = generator.CalculateDisparity(leftIm, rightIm, settings.GetOptions());
+					disparity.Image = generator.CalculateDisparity(leftIm, rightIm, settings.Options);
 
 					var middleX = disparity.Image.Width/2;
 					var middleY = disparity.Image.Height/2;

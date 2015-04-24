@@ -3969,7 +3969,7 @@
             <param name="w">Main diagonal elements of diagonal weight matrix D.</param>
         </member>
         <member name="M:LinearAlgebra.Matrix.CheckQuality(System.Double[],System.Double[])">
-            <summary>Calculates RІ, corrected RІ and Quadratic Error for the trySolution x to the linear system A'Ax=A'b, 
+            <summary>Calculates R², corrected R² and Quadratic Error for the trySolution x to the linear system A'Ax=A'b, 
             A being this matrix.</summary>
             <param name="Y">Right-hand side known values.</param>
             <param name="trySolution">Solution to use to evaluate quality indexers.</param>
@@ -4008,10 +4008,10 @@
             <summary> Gets the number of columns in this matrix.</summary>
         </member>
         <member name="P:LinearAlgebra.Matrix.RSquareIndex">
-            <summary>Returns the RІ index of last fit.</summary>
+            <summary>Returns the R² index of last fit.</summary>
         </member>
         <member name="P:LinearAlgebra.Matrix.RSquareCorrectedIndex">
-            <summary>Returns corrected RІ index of last fit.</summary>
+            <summary>Returns corrected R² index of last fit.</summary>
         </member>
         <member name="P:LinearAlgebra.Matrix.QuadraticError">
             <summary>Returns the sum of quadratic errors of last fit.</summary>
