@@ -39,7 +39,8 @@ namespace EmguLeap
 
 		public float GetDistance(int x, int y)
 		{
-			return Map3D[y*ImageWidth + x].z;
+			//return Map3D[y*ImageWidth + x].z;
+			return Map3D[y*ImageWidth + x].z*20.408f + 4.592f;
 		}
 	}
 }
