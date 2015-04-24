@@ -47,12 +47,14 @@ namespace EmguLeap
 
 		private void CalculateDistance(Bitmap disparityIm)
 		{
-
-			var middleX = disparityIm.Width / 2;
-			var middleY = disparityIm.Height / 2;
+			var middlePoint = new Point(disparityIm.Width/2, disparityIm.Height/2);
 
 			calculator = new DistanceCalculator(disparityIm);
-			distanceForm.UpdateDistanceToCenter(calculator.GetDistance(middleX, middleY));
+			var distanceInPoint = calculator.GetDistance(middlePoint);
+			var distanceInRectangle = calculator.GetDistanceToRectangle(middlePoint, 10);
+
+			//distanceForm.UpdateDistanceToCenter(distanceInPoint);
+			distanceForm.UpdateDistanceToCenter(distanceInRectangle);
 		}
 
 		private void UpdateBuffer(Bitmap disparityIm)
