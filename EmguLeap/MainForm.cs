@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using OpenTKLib;
@@ -34,17 +35,18 @@ namespace EmguLeap
 					right.Image = rightIm;
 					disparity.Image = generator.CalculateDisparity(leftIm, rightIm, settings.Options);
 
-					var middleX = disparity.Image.Width/2;
-					var middleY = disparity.Image.Height/2;
-
+					var middleX = disparity.Image.Width / 2;
+					var middleY = disparity.Image.Height / 2;
 					var distanceCalculator = new DistanceCalculator((Bitmap)disparity.Image);
+
 					distances.UpdateDistanceToCenter(distanceCalculator.GetDistance(middleX, middleY));
 
-					var vertices = distanceCalculator.ToVertexList();
-					var colors = new byte[vertices.Count];
-					for (var i = 0; i < colors.Length; i++)
-						colors[i] = 240;
-					GLTestForm.ShowListOfVertices(vertices, colors);
+					Vertices = distanceCalculator.ToVertexList();
+					Colors = new byte[Vertices.Count];
+					for (var i = 0; i < Colors.Length; i++)
+						Colors[i] = 240;
+
+					GLTestForm.ShowListOfVertices(Vertices, Colors);
 				}));
 		}
 
@@ -53,5 +55,8 @@ namespace EmguLeap
 		private readonly Settings settings;
 		private readonly Distances distances;
 		private readonly OpenTKTestForm GLTestForm;
+
+		private List<Vertex> Vertices;
+		private byte[] Colors;
 	}
 }
