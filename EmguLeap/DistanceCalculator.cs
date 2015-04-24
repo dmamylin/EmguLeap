@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
-using OpenTKLib;
 
 namespace EmguLeap
 {
@@ -29,17 +29,12 @@ namespace EmguLeap
 
 		public void ConvertToObj(string filename)
 		{
-			var outFile = new System.IO.StreamWriter(filename);
+			var outFile = new StreamWriter(filename);
 
 			foreach (var point in Map3D)
 				outFile.WriteLine("v " + point.x + " " + point.y + " " + point.z);
 
 			outFile.Close();
-		}
-
-		public List<Vertex> ToVertexList()
-		{
-			return Map3D.Select(point => new Vertex(point.x, point.y, point.z)).ToList();
 		}
 
 		public float GetDistance(int x, int y)

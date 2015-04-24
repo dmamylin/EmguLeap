@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using OpenTKLib;
-using Image = Leap.Image;
 
 namespace EmguLeap
 {
@@ -71,15 +69,6 @@ namespace EmguLeap
 			}
 		}
 
-		private void UpdatePointCloud(Bitmap disparityIm)
-		{
-			var vertices = calculator.ToVertexList();
-			var colors = new byte[vertices.Count];
-			for (var i = 0; i < colors.Length; i++)
-				colors[i] = 240;
-			GLTestForm.ShowListOfVertices(vertices, colors);
-		}
-
 		private Image<Gray, byte> GetAverage(List<Image<Gray, byte>> images)
 		{
 			var height = images[0].Height;
@@ -106,7 +95,6 @@ namespace EmguLeap
 		private Settings settingsForm;
 		private ImageForm imageForm;
 		private Distances distanceForm;
-		private OpenTKTestForm GLTestForm;
 
 		private DisparityGenerator generator;
 		private ImageProvider provider;

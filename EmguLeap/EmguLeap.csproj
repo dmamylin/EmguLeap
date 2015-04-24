@@ -202,20 +202,6 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OpenTK\OpenTKLib\OpenTKLib.csproj">
-      <Project>{df1f2330-134c-4ec6-a97c-3011d3072f0a}</Project>
-      <Name>OpenTKLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenTK\OpenTKTest\OpenTKTest.csproj">
-      <Project>{546a9835-c8bc-4c43-a01c-c6603af6674e}</Project>
-      <Name>OpenTKTest</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenTK\UnitTestsOpenTK\UnitTestsOpenTK.csproj">
-      <Project>{7a011760-0445-46f0-8409-d4f21672470a}</Project>
-      <Name>UnitTestsOpenTK</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\OpenCL.Net.2.2.9.0\build\net40\OpenCL.Net.targets" Condition="Exists('..\packages\OpenCL.Net.2.2.9.0\build\net40\OpenCL.Net.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
