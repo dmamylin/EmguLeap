@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -44,6 +45,9 @@ namespace EmguLeap
 
 		public Bitmap CalculateDisparity(Bitmap leftRaw, Bitmap rightRaw, DisparityOptions options)
 		{
+			var sw = new Stopwatch();
+			sw.Start();
+
 			var left = new Image<Gray, byte>(new Size(640, 240));
 			var right = new Image<Gray, byte>(new Size(640, 240));
 			CvInvoke.cvRemap(new Image<Gray, byte>(leftRaw), left, mapx1, mapy1,1, new MCvScalar(0));
@@ -65,10 +69,8 @@ namespace EmguLeap
 			{
 				stereoSolver.FindStereoCorrespondence(left, right, disparityMap);
 			}
-			//using (var stereoSolver = new StereoSGBM(16, 160, 7, 1600, 2200, 96, 48, 0, 0, 4, StereoSGBM.Mode.SGBM))
-			//{
-			//	stereoSolver.FindStereoCorrespondence(left, right, disparityMap);
-			//}
+			sw.Stop();
+			Console.WriteLine("{0} ms fo sgbm computation.",sw.ElapsedMilliseconds);
 
 			return disparityMap.ToBitmap();
 

@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisparityGeneratorGC.cs" />
     <Compile Include="DisparityGenerator.cs" />
     <Compile Include="DistanceCalculator.cs" />
     <Compile Include="Distances.cs">

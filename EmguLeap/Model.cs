@@ -11,19 +11,19 @@ namespace EmguLeap
 			imageForm = new ImageForm();
 			settingsForm = new Settings();
 			distanceForm = new Distances();
-			GLTestForm = new OpenTKTestForm();
+			//GLTestForm = new OpenTKTestForm();
 
 			provider = new ImageProvider();
 			generator = new DisparityGenerator();
 
 			provider.AddNewAction(ChangeImages);
 			OnNewDisparityImage += CalculateDistance;
-			OnNewDisparityImage += UpdatePointCloud;
+			//OnNewDisparityImage += UpdatePointCloud;
 
 			imageForm.Visible = true;
 			settingsForm.Visible = true;
 			distanceForm.Visible = true;
-			GLTestForm.Visible = true;
+			//GLTestForm.Visible = true;
 		}
 
 		private void ChangeImages(Bitmap[] images)
