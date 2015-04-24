@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using OpenTKLib;
 
 namespace EmguLeap
@@ -12,20 +11,22 @@ namespace EmguLeap
 			imageForm = new ImageForm();
 			settingsForm = new Settings();
 			distanceForm = new Distances();
-			//GLTestForm = new OpenTKTestForm();
+			GLTestForm = new OpenTKTestForm();
 
 			provider = new ImageProvider();
 			generator = new DisparityGenerator();
 
 			provider.AddNewAction(ChangeImages);
 			OnNewDisparityImage += CalculateDistance;
+			OnNewDisparityImage += UpdatePointCloud;
 
 			imageForm.Visible = true;
 			settingsForm.Visible = true;
 			distanceForm.Visible = true;
+			GLTestForm.Visible = true;
 		}
 
-		public void ChangeImages(Bitmap[] images)
+		private void ChangeImages(Bitmap[] images)
 		{
 			Console.WriteLine("Changing images.");
 			var leftIm = images[0];
@@ -37,18 +38,6 @@ namespace EmguLeap
 			Console.WriteLine("Images changed.");
 
 			OnNewDisparityImage((Bitmap)disparityIm.Clone());
-
-			//		var middleX = disparity.Image.Width / 2;
-			//		var middleY = disparity.Image.Height / 2;
-
-			//		var distanceCalculator = new DistanceCalculator((Bitmap)disparity.Image);
-			//		distances.UpdateDistanceToCenter(distanceCalculator.GetDistance(middleX, middleY));
-
-			//		var vertices = distanceCalculator.ToVertexList();
-			//		var colors = new byte[vertices.Count];
-			//		for (var i = 0; i < colors.Length; i++)
-			//			colors[i] = 240;
-			//		GLTestForm.ShowListOfVertices(vertices, colors);
 		}
 
 		private void CalculateDistance(Bitmap disparityIm)
@@ -57,8 +46,17 @@ namespace EmguLeap
 			var middleX = disparityIm.Width / 2;
 			var middleY = disparityIm.Height / 2;
 
-			var distanceCalculator = new DistanceCalculator(disparityIm);
-			distanceForm.UpdateDistanceToCenter(distanceCalculator.GetDistance(middleX, middleY));
+			calculator = new DistanceCalculator(disparityIm);
+			distanceForm.UpdateDistanceToCenter(calculator.GetDistance(middleX, middleY));
+		}
+
+		private void UpdatePointCloud(Bitmap disparityIm)
+		{
+			var vertices = calculator.ToVertexList();
+			var colors = new byte[vertices.Count];
+			for (var i = 0; i < colors.Length; i++)
+				colors[i] = 240;
+			GLTestForm.ShowListOfVertices(vertices, colors);
 		}
 
 		private Action<Bitmap> OnNewDisparityImage;
@@ -70,6 +68,6 @@ namespace EmguLeap
 
 		private DisparityGenerator generator;
 		private ImageProvider provider;
-
+		private DistanceCalculator calculator;
 	}
 }
