@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
+using Leap;
 
 namespace EmguLeap
 {
@@ -15,6 +17,7 @@ namespace EmguLeap
 		private readonly MCvPoint3D32f[] Map3D;
 		private readonly int ImageHeight;
 		private readonly int ImageWidth;
+		private const float MaxZ = 2.0f;
 
 		public DistanceCalculator(Bitmap disparityMap)
 		{
@@ -38,48 +41,85 @@ namespace EmguLeap
 			outFile.Close();
 		}
 
-		private float DistanceInCm(float rawDistance)
+		private float RawDistanceToCm(float rawDistance)
 		{
 			return rawDistance*20.408f + 4.592f;
 		}
 
-		public float GetDistance(int x, int y)
+		public float GetRawDistance(int x, int y)
 		{
-			//return Map3D[y*ImageWidth + x].z*20.408f + 4.592f;
-			return DistanceInCm(Map3D[y*ImageWidth + x].z);
+			return Map3D[y*ImageWidth + x].z;
 		}
 
-		public float GetDistance(Point point)
+		public float GetRawDistance(Point point)
 		{
-			return GetDistance(point.X, point.Y);
+			return GetRawDistance(point.X, point.Y);
 		}
 
-		public float GetDistanceToRectangle(Point middlePoint, int radius)
+		public float GetCmDistance(int x, int y)
+		{
+			return RawDistanceToCm(GetRawDistance(x, y));
+		}
+
+		public float GetCmDistance(Point point)
+		{
+			return RawDistanceToCm(GetRawDistance(point));
+		}
+
+		public float GetDistanceToRectangleAverageFilter(Point middlePoint, int radius)
 		{
 			var upperLeftCorner = new Point(middlePoint.X - radius, middlePoint.Y - radius);
 			var bottomRightCorner = new Point(middlePoint.X + radius, middlePoint.Y + radius);
 
-			return GetDistanceToRectangle(upperLeftCorner, bottomRightCorner);
+			return GetDistanceToRectangle(upperLeftCorner, bottomRightCorner, AverageFilter);
 		}
 
-		public float GetDistanceToRectangle(Point upperLeftCorner, Point bottomRightCorner)
+		public float GetDistanceToRectangle(Point upperLeftCorner, Point bottomRightCorner, Func<IterationRange2D, float> filter)
 		{
-			var sumOfDistances = 0.0f;
-
 			var startX = Math.Max(upperLeftCorner.X, 0);
 			var startY = Math.Max(upperLeftCorner.Y, 0);
 
 			var endX = Math.Min(bottomRightCorner.X, ImageWidth);
 			var endY = Math.Min(bottomRightCorner.Y, ImageHeight);
 
-			var totalCount = (endX - startX)*(endY - startY);
+			var distance = filter(new IterationRange2D(new Point(startX, endX), new Point(startY, endY)));			
 
-			for (var x = startX; x < endX; x++)
-				for (var y = startY; y < endY; y++)
-					sumOfDistances += GetDistance(x, y);
+			return RawDistanceToCm(distance);
+		}
 
-			// Filtering by average
-			return DistanceInCm(sumOfDistances/totalCount);
+		public float AverageFilter(IterationRange2D iterationRange)
+		{
+			var sumOfDistances = 0.0f;
+
+			for (var x = iterationRange.StartX; x < iterationRange.EndX; x++)
+				for (var y = iterationRange.StartY; y < iterationRange.EndY; y++)
+					sumOfDistances += Math.Min(GetRawDistance(x, y), MaxZ);
+
+			return sumOfDistances/iterationRange.TotalCount;
+		}
+
+		public float KalmanFilter(IterationRange2D iterationRange)
+		{
+			Kalman
+		}
+
+		public class IterationRange2D
+		{
+			private readonly Point RangeX;
+			private readonly Point RangeY;
+
+			public int StartX { get { return RangeX.X; } }
+			public int EndX { get { return RangeX.Y; } }
+			public int StartY { get { return RangeY.X; } }
+			public int EndY { get { return RangeY.Y;} }
+
+			public int TotalCount { get { return Math.Abs((EndX - StartX)*(EndY - StartY)); } }
+
+			public IterationRange2D(Point rangeX, Point rangeY)
+			{
+				RangeX = rangeX;
+				RangeY = rangeY;
+			}
 		}
 	}
 }

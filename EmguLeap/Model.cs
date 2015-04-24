@@ -50,8 +50,8 @@ namespace EmguLeap
 			var middlePoint = new Point(disparityIm.Width/2, disparityIm.Height/2);
 
 			calculator = new DistanceCalculator(disparityIm);
-			var distanceInPoint = calculator.GetDistance(middlePoint);
-			var distanceInRectangle = calculator.GetDistanceToRectangle(middlePoint, 10);
+			var distanceInPoint = calculator.GetCmDistance(middlePoint);
+			var distanceInRectangle = calculator.GetDistanceToRectangleAverageFilter(middlePoint, 5);
 
 			//distanceForm.UpdateDistanceToCenter(distanceInPoint);
 			distanceForm.UpdateDistanceToCenter(distanceInRectangle);

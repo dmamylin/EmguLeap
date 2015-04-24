@@ -36,7 +36,7 @@ namespace EmguLeap
 					var middleY = disparity.Image.Height / 2;
 					var distanceCalculator = new DistanceCalculator((Bitmap)disparity.Image);
 
-					distances.UpdateDistanceToCenter(distanceCalculator.GetDistance(middleX, middleY));
+					distances.UpdateDistanceToCenter(distanceCalculator.GetRawDistance(middleX, middleY));
 
 				}));
 		}
