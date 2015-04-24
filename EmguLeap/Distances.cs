@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace EmguLeap
 {
@@ -18,7 +11,17 @@ namespace EmguLeap
 
 		public void UpdateDistanceToCenter(float newDistance)
 		{
-			label2.Text = newDistance.ToString("F");
+			if (amount.InvokeRequired)
+			{
+				amount.Invoke(new MethodInvoker(delegate
+								{
+									amount.Text = newDistance.ToString("F");
+								}));
+			}
+			else
+			{
+				amount.Text = newDistance.ToString("F");
+			}
 		}
 	}
 }
