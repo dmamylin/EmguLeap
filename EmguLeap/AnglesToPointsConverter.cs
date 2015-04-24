@@ -19,7 +19,7 @@ namespace EmguLeap
 
 		private Point CalculateCoordinates()
 		{
-			
+			return new Point(1, 2);
 		}
 
 		public Point GetPoint()

@@ -15,10 +15,9 @@ namespace EmguLeap
 		private readonly int ImageHeight;
 		private readonly int ImageWidth;
 
-		public DistanceCalculator(Bitmap disparityMap)
+		public DistanceCalculator(Bitmap disparityMap, MatrixLoader matrixLoader)
 		{
-			var xDoc = XDocument.Load("..\\..\\CalibrationData\\Q.xml");
-			var matrixQ = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
+			var matrixQ = matrixLoader.Q;
 			var disparityImage = new Image<Gray, byte>(disparityMap);
 
 			ImageHeight = disparityImage.Height;

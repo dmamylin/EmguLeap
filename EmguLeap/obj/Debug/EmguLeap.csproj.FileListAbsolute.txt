@@ -144,3 +144,4 @@ C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.MainForm.resources
 C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.Settings.resources
 C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.csproj.GenerateResource.Cache
 C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.ImageForm.resources
+C:\Users\Dmitry\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.ImageForm.resources

@@ -1,6 +1,0 @@
-﻿namespace EmguLeap
-{
-	class LowLevelDistanceCalculator
-	{
-	}
-}

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace EmguLeap
 {
@@ -13,8 +7,10 @@ namespace EmguLeap
 		static void Main(string[] args)
 		{
 			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
+			Application.SetCompatibleTextRenderingDefault(false);			
+
 			var model = new Model();
+			model.Run();
 			Application.Run();
 		}
 	}

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using OpenTKLib;
 
 namespace EmguLeap
@@ -16,7 +15,11 @@ namespace EmguLeap
 
 			provider = new ImageProvider();
 			generator = new DisparityGenerator();
+			MatrixLoader = new MatrixLoader();
+		}
 
+		public void Run()
+		{
 			provider.AddNewAction(ChangeImages);
 
 			imageForm.Visible = true;
@@ -61,6 +64,7 @@ namespace EmguLeap
 
 		private DisparityGenerator generator;
 		private ImageProvider provider;
+		private MatrixLoader MatrixLoader;
 
 	}
 }

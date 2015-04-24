@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnglesToPointsConverter.cs" />
     <Compile Include="DisparityGenerator.cs" />
     <Compile Include="DistanceCalculator.cs" />
     <Compile Include="Distances.cs">
@@ -93,6 +94,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MatrixLoader.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
