@@ -54,6 +54,13 @@ namespace EmguLeap
 			//	}));
 		}
 
+		private void CalculateDistance(Bitmap disparityIm)
+		{
+			
+		}
+
+		private Action<Bitmap> OnNewDisparityImage; 
+
 		private Settings settingsForm;
 		private ImageForm imageForm;
 		private Distances distancesForm;
