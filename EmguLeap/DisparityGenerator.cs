@@ -103,8 +103,8 @@ namespace EmguLeap
 			numDisparities = numD;
 			minDispatities = minD;
 			SAD = sad;
-			P1 = 8 * 1 * SAD * SAD;
-			P2 = 32 * 1 * SAD * SAD;
+			P1 =  SAD * SAD;
+			P2 = 512 * 1 * SAD * SAD;
 			disp12MaxDiff = disp12;
 			PreFilterCap = preFilter;
 			UniquenessRatio = uniqRatio;
