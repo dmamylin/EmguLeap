@@ -82,7 +82,7 @@ namespace EmguLeap
 			var endX = Math.Min(bottomRightCorner.X, ImageWidth);
 			var endY = Math.Min(bottomRightCorner.Y, ImageHeight);
 
-			var distance = filter(new IterationRange2D(new Point(startX, endX), new Point(startY, endY)));			
+			var distance = filter(new IterationRange2D(new Point(startX, endX), new Point(startY, endY)));
 
 			return RawDistanceToCm(distance);
 		}
@@ -98,10 +98,17 @@ namespace EmguLeap
 			return sumOfDistances/iterationRange.TotalCount;
 		}
 
-		//public float KalmanFilter(IterationRange2D iterationRange)
-		//{
-		//	Kalman
-		//}
+		float GetDistanceByAngles(double latitude, double longitude)
+		{
+			// TODO: validate angles
+
+			var midX = ImageWidth/2;
+			var midY = ImageHeight/2;
+			var dx = (int)Math.Floor(midX*latitude);
+			var dy = (int)Math.Floor(midY*longitude);
+
+			return GetCmDistance(new Point(midX - dx, midY + dy));
+		}
 
 		public class IterationRange2D
 		{
