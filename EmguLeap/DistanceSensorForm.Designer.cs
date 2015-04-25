@@ -31,7 +31,7 @@
 			this.Image = new System.Windows.Forms.PictureBox();
 			this.Angle = new System.Windows.Forms.TrackBar();
 			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
+			this.amount = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.Image)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Angle)).BeginInit();
 			this.SuspendLayout();
@@ -49,8 +49,8 @@
 			// Angle
 			// 
 			this.Angle.Location = new System.Drawing.Point(587, 12);
-			this.Angle.Maximum = 40;
-			this.Angle.Minimum = -40;
+			this.Angle.Maximum = 75;
+			this.Angle.Minimum = -75;
 			this.Angle.Name = "Angle";
 			this.Angle.Size = new System.Drawing.Size(142, 45);
 			this.Angle.TabIndex = 1;
@@ -64,26 +64,27 @@
 			this.label1.TabIndex = 2;
 			this.label1.Text = "Distance is:";
 			// 
-			// label2
+			// amount
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(636, 111);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(13, 13);
-			this.label2.TabIndex = 3;
-			this.label2.Text = "0";
-			this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.amount.AutoSize = true;
+			this.amount.Location = new System.Drawing.Point(636, 111);
+			this.amount.Name = "amount";
+			this.amount.Size = new System.Drawing.Size(13, 13);
+			this.amount.TabIndex = 3;
+			this.amount.Text = "0";
+			this.amount.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
-			// DistanceSensor
+			// DistanceSensorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(741, 261);
-			this.Controls.Add(this.label2);
+			this.Controls.Add(this.amount);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.Angle);
 			this.Controls.Add(this.Image);
-			this.Name = "DistanceSensor";
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Name = "DistanceSensorForm";
 			this.Text = "DistanceSensor";
 			((System.ComponentModel.ISupportInitialize)(this.Image)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Angle)).EndInit();
@@ -97,6 +98,6 @@
 		private System.Windows.Forms.PictureBox Image;
 		private System.Windows.Forms.TrackBar Angle;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label amount;
 	}
 }

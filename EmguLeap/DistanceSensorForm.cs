@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace EmguLeap
@@ -15,6 +8,33 @@ namespace EmguLeap
 		public DistanceSensorForm()
 		{
 			InitializeComponent();
+		}
+
+		public void ChangeImage(Bitmap image)
+		{
+			Image.Image = image;
+		}
+
+		public void ChangeDistance(float distance)
+		{
+			if (amount.InvokeRequired)
+			{
+				amount.Invoke(new MethodInvoker(delegate
+				{
+					amount.Text = distance.ToString("F");
+				}));
+			}
+			else
+			{
+				amount.Text = distance.ToString("F");
+			}
+		}
+
+		public double GetAngle()
+		{
+			var rawData = Angle.GetData();
+			var invertedData = -rawData;
+			return invertedData;
 		}
 	}
 }

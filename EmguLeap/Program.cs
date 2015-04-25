@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Emgu.CV;
-using Emgu.CV.Structure;
+﻿using System.Windows.Forms;
 
 namespace EmguLeap
 {
@@ -16,7 +8,7 @@ namespace EmguLeap
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			var model = new Model();
+			var model = new DistanceModel();
 			Application.Run();
 
 			//var generator = new DisparityGeneratorGC();

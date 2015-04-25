@@ -26,25 +26,14 @@ namespace EmguLeap
 		{
 			var leftIm = images[0];
 			var rightIm = images[1];
-			var options = settingsForm.Options;
-			var disparityIm = generator.CalculateDisparity(leftIm, rightIm, settingsForm.Options);
-
-			imageForm.ChangeImages(new[] { leftIm, rightIm, disparityIm });
-			Console.WriteLine("Images changed.");
+			var disparityIm = generator.CalculateDisparity(leftIm, rightIm, DisparityOptionsGenerator.GetOptions());
 
 			OnNewDisparityImage((Bitmap)disparityIm.Clone());
 		}
 
 		private void CalculateDistance(Bitmap disparityIm)
 		{
-			var middlePoint = new Point(disparityIm.Width/2, disparityIm.Height/2);
 
-			calculator = new DistanceCalculator(disparityIm);
-			var distanceInPoint = calculator.GetCmDistance(middlePoint);
-			var distanceInRectangle = calculator.GetDistanceToRectangleAverageFilter(middlePoint, 5);
-
-			//distanceForm.UpdateDistanceToCenter(distanceInPoint);
-			distanceForm.UpdateDistanceToCenter(distanceInRectangle);
 		}
 
 		private void UpdateBuffer(Bitmap disparityIm)
@@ -55,9 +44,7 @@ namespace EmguLeap
 			{
 				Average = GetAverage(Buffer);
 				Buffer = new List<Image<Gray, byte>>();
-
-				CvInvoke.cvShowImage("Average",Average);
-				CvInvoke.cvWaitKey(600);
+				distanceForm.ChangeImage(Average.ToBitmap());
 			}
 		}
 
