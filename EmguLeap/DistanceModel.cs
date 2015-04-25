@@ -14,6 +14,7 @@ namespace EmguLeap
 
 			provider = new ImageProvider();
 			generator = new DisparityGenerator();
+			calculator = new DistanceCalculator();
 
 			provider.AddNewAction(UpdateDisparity);
 			OnNewDisparityImage += UpdateBuffer;
@@ -34,6 +35,7 @@ namespace EmguLeap
 		private void CalculateDistance()
 		{
 			var angle = distanceForm.GetAngle();
+			calculator.UpdateImage(Average.ToBitmap());
 			calculator.GetDistanceByAngle(angle, calculator.AverageFilter);
 		}
 
