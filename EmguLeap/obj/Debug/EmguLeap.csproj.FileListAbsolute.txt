@@ -114,3 +114,6 @@ C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.csproj.GenerateRes
 C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.ImageForm.resources
 C:\Users\Dmitry\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.ImageForm.resources
 C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.DistanceSensorForm.resources
+D:\projects\EmguLeap\EmguLeap\bin\Debug\EmguLeap.exe.config
+D:\projects\EmguLeap\EmguLeap\obj\Debug\EmguLeap.exe
+D:\projects\EmguLeap\EmguLeap\obj\Debug\EmguLeap.pdb
