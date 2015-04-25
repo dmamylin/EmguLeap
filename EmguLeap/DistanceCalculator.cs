@@ -14,24 +14,28 @@ namespace EmguLeap
 {
 	public class DistanceCalculator
 	{
-		private readonly MCvPoint3D32f[] Map3D;
-		private readonly int ImageHeight;
-		private readonly int ImageWidth;
+		private MCvPoint3D32f[] Map3D;
+		private int ImageHeight;
+		private int ImageWidth;
+		private Matrix<double> matrixQ;
 		private const float MaxZ = 2.0f;
 		private const float HorizontalFOV = 150.0f; // Degrees
 
-		public DistanceCalculator(Bitmap disparityMap)
+		public DistanceCalculator()
 		{
 			var xDoc = XDocument.Load("..\\..\\CalibrationData\\Q.xml");
-			var matrixQ = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
-			var disparityImage = new Image<Gray, byte>(disparityMap);
-
-			ImageHeight = disparityImage.Height;
-			ImageWidth = disparityImage.Width;
-
-			Map3D = PointCollection.ReprojectImageTo3D(disparityImage, matrixQ);
+			matrixQ = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
 		}
 
+		public void UpdateImage(Bitmap image)
+		{
+
+
+			ImageHeight = image.Height;
+			ImageWidth = image.Width;
+
+			Map3D = PointCollection.ReprojectImageTo3D(new Image<Gray, byte>(image), matrixQ);
+		}
 		public void ConvertToObj(string filename)
 		{
 			var outFile = new StreamWriter(filename);
@@ -44,12 +48,12 @@ namespace EmguLeap
 
 		private float RawDistanceToCm(float rawDistance)
 		{
-			return rawDistance*20.408f + 4.592f;
+			return rawDistance * 20.408f + 4.592f;
 		}
 
 		public float GetRawDistance(int x, int y)
 		{
-			return Map3D[y*ImageWidth + x].z;
+			return Map3D[y * ImageWidth + x].z;
 		}
 
 		public float GetRawDistance(Point point)
@@ -91,7 +95,7 @@ namespace EmguLeap
 		private float GetDistanceToVerticalLine(Point upperPoint, Point bottomPoint, Func<IterationRange2D, float> filter)
 		{
 			var iterationRange =
-				new IterationRange2D(new Point(upperPoint.X, upperPoint.X+1), new Point(upperPoint.Y, bottomPoint.X));
+				new IterationRange2D(new Point(upperPoint.X, upperPoint.X + 1), new Point(upperPoint.Y, bottomPoint.X));
 			var rawDistance = filter(iterationRange);
 
 			return RawDistanceToCm(rawDistance);
@@ -105,15 +109,15 @@ namespace EmguLeap
 				for (var y = iterationRange.StartY; y < iterationRange.EndY; y++)
 					sumOfDistances += Math.Min(GetRawDistance(x, y), MaxZ);
 
-			return sumOfDistances/iterationRange.TotalCount;
+			return sumOfDistances / iterationRange.TotalCount;
 		}
 
 		public float GetDistanceByAngle(double angle, Func<IterationRange2D, float> filter)
 		{
 			// TODO: validate angle
 
-			var midX = ImageWidth/2;
-			var dx = (int)Math.Floor(2*midX*angle/HorizontalFOV);
+			var midX = ImageWidth / 2;
+			var dx = (int)Math.Floor(2 * midX * angle / HorizontalFOV);
 			var upperPoint = new Point(midX - dx, 0);
 			var bottomPoint = new Point(upperPoint.X, ImageHeight);
 
@@ -128,9 +132,9 @@ namespace EmguLeap
 			public int StartX { get { return RangeX.X; } }
 			public int EndX { get { return RangeX.Y; } }
 			public int StartY { get { return RangeY.X; } }
-			public int EndY { get { return RangeY.Y;} }
+			public int EndY { get { return RangeY.Y; } }
 
-			public int TotalCount { get { return Math.Abs((EndX - StartX)*(EndY - StartY)); } }
+			public int TotalCount { get { return Math.Abs((EndX - StartX) * (EndY - StartY)); } }
 
 			public IterationRange2D(Point rangeX, Point rangeY)
 			{

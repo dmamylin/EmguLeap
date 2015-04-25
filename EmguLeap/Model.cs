@@ -17,6 +17,7 @@ namespace EmguLeap
 
 			provider = new ImageProvider();
 			generator = new DisparityGenerator();
+			calculator = new DistanceCalculator();
 
 			Buffer = new List<Image<Gray, byte>>();
 
@@ -49,7 +50,6 @@ namespace EmguLeap
 		{
 			var middlePoint = new Point(disparityIm.Width/2, disparityIm.Height/2);
 
-			calculator = new DistanceCalculator(disparityIm);
 			var distanceInPoint = calculator.GetCmDistance(middlePoint);
 			var distanceInRectangle = calculator.GetDistanceToRectangleAverageFilter(middlePoint, 5);
 

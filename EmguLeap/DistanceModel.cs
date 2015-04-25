@@ -14,10 +14,11 @@ namespace EmguLeap
 
 			provider = new ImageProvider();
 			generator = new DisparityGenerator();
+			calculator = new DistanceCalculator();
 
 			provider.AddNewAction(UpdateDisparity);
-			OnNewDisparityImage += CalculateDistance;
 			OnNewDisparityImage += UpdateBuffer;
+			OnNewAverageImage += CalculateDistance;
 
 			distanceForm.Visible = true;
 		}
@@ -31,9 +32,11 @@ namespace EmguLeap
 			OnNewDisparityImage((Bitmap)disparityIm.Clone());
 		}
 
-		private void CalculateDistance(Bitmap disparityIm)
+		private void CalculateDistance()
 		{
-
+			var angle = distanceForm.GetAngle();
+			calculator.UpdateImage(Average.ToBitmap());
+			calculator.GetDistanceByAngle(angle, calculator.AverageFilter);
 		}
 
 		private void UpdateBuffer(Bitmap disparityIm)
@@ -45,6 +48,7 @@ namespace EmguLeap
 				Average = GetAverage(Buffer);
 				Buffer = new List<Image<Gray, byte>>();
 				distanceForm.ChangeImage(Average.ToBitmap());
+				OnNewAverageImage();
 			}
 		}
 
@@ -67,6 +71,7 @@ namespace EmguLeap
 		}
 
 		private Action<Bitmap> OnNewDisparityImage;
+		private Action OnNewAverageImage;
 
 		private List<Image<Gray, byte>> Buffer =  new List<Image<Gray, byte>>();
 		private Image<Gray, byte> Average;

@@ -108,7 +108,6 @@ C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\bin\Debug\OpenCL.Net.dll
 C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\bin\Debug\nunit.framework.xml
 C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.csprojResolveAssemblyReference.cache
 C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.Distances.resources
-C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.MainForm.resources
 C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.Settings.resources
 C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.csproj.GenerateResource.Cache
 C:\Users\Vasiliy\Desktop\EmguLeap\EmguLeap\obj\Debug\EmguLeap.ImageForm.resources
