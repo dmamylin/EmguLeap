@@ -18,6 +18,7 @@ namespace EmguLeap
 		private readonly int ImageHeight;
 		private readonly int ImageWidth;
 		private const float MaxZ = 2.0f;
+		private const float HorizontalFOV = 150.0f; // Degrees
 
 		public DistanceCalculator(Bitmap disparityMap)
 		{
@@ -87,6 +88,15 @@ namespace EmguLeap
 			return RawDistanceToCm(distance);
 		}
 
+		private float GetDistanceToVerticalLine(Point upperPoint, Point bottomPoint, Func<IterationRange2D, float> filter)
+		{
+			var iterationRange =
+				new IterationRange2D(new Point(upperPoint.X, upperPoint.X+1), new Point(upperPoint.Y, bottomPoint.X));
+			var rawDistance = filter(iterationRange);
+
+			return RawDistanceToCm(rawDistance);
+		}
+
 		public float AverageFilter(IterationRange2D iterationRange)
 		{
 			var sumOfDistances = 0.0f;
@@ -98,16 +108,16 @@ namespace EmguLeap
 			return sumOfDistances/iterationRange.TotalCount;
 		}
 
-		float GetDistanceByAngles(double latitude, double longitude)
+		public float GetDistanceByAngle(double angle, Func<IterationRange2D, float> filter)
 		{
-			// TODO: validate angles
+			// TODO: validate angle
 
 			var midX = ImageWidth/2;
-			var midY = ImageHeight/2;
-			var dx = (int)Math.Floor(midX*latitude);
-			var dy = (int)Math.Floor(midY*longitude);
+			var dx = (int)Math.Floor(2*midX*angle/HorizontalFOV);
+			var upperPoint = new Point(midX - dx, 0);
+			var bottomPoint = new Point(upperPoint.X, ImageHeight);
 
-			return GetCmDistance(new Point(midX - dx, midY + dy));
+			return GetDistanceToVerticalLine(upperPoint, bottomPoint, filter);
 		}
 
 		public class IterationRange2D
