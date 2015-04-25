@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Emgu.CV;
 using Emgu.CV.Structure;
@@ -50,9 +47,9 @@ namespace EmguLeap
 
 			var left = new Image<Gray, byte>(new Size(640, 240));
 			var right = new Image<Gray, byte>(new Size(640, 240));
-			CvInvoke.cvRemap(new Image<Gray, byte>(leftRaw), left, mapx1, mapy1,1, new MCvScalar(0));
-			CvInvoke.cvRemap(new Image<Gray, byte>(rightRaw), right, mapx2, mapy2,1, new MCvScalar(0));
-			
+			CvInvoke.cvRemap(new Image<Gray, byte>(leftRaw), left, mapx1, mapy1, 1, new MCvScalar(0));
+			CvInvoke.cvRemap(new Image<Gray, byte>(rightRaw), right, mapx2, mapy2, 1, new MCvScalar(0));
+
 			Size size = left.Size;
 			var disparityMap = new Image<Gray, short>(size);
 			using (var stereoSolver = new StereoSGBM(options.minDispatities,
@@ -69,23 +66,18 @@ namespace EmguLeap
 			{
 				stereoSolver.FindStereoCorrespondence(left, right, disparityMap);
 			}
+
+
+			var byteDisparity = disparityMap.Convert<Gray, byte>();
+
+			CvInvoke.cvFastNlMeansDenoising(byteDisparity, byteDisparity, 3, 7, 21);
+
 			sw.Stop();
-			Console.WriteLine("{0} ms fo sgbm computation.",sw.ElapsedMilliseconds);
-
-			return disparityMap.ToBitmap();
+			Console.WriteLine("{0} ms fo sgbm computation.", sw.ElapsedMilliseconds);
 
 
-			//using (StereoSGBM solver = new StereoSGBM(-64,
-			//	192,
-			//	5,
-			//	600,
-			//	2400,
-			//	10,
-			//	4,
-			//	1,
-			//	150,
-			//	2,
-			//	StereoSGBM.Mode.SGBM))
+			return byteDisparity.ToBitmap();
+
 		}
 
 		private Matrix<float> mapx1;
@@ -103,7 +95,7 @@ namespace EmguLeap
 			numDisparities = numD;
 			minDispatities = minD;
 			SAD = sad;
-			P1 =  SAD * SAD;
+			P1 = SAD * SAD;
 			P2 = 512 * 1 * SAD * SAD;
 			disp12MaxDiff = disp12;
 			PreFilterCap = preFilter;

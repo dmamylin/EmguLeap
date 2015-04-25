@@ -33,7 +33,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.amount = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
+			this.rawAmount = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.Image)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Angle)).BeginInit();
 			this.SuspendLayout();
@@ -41,41 +41,37 @@
 			// Image
 			// 
 			this.Image.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.Image.Location = new System.Drawing.Point(16, 15);
-			this.Image.Margin = new System.Windows.Forms.Padding(4);
+			this.Image.Location = new System.Drawing.Point(12, 12);
 			this.Image.Name = "Image";
-			this.Image.Size = new System.Drawing.Size(759, 292);
+			this.Image.Size = new System.Drawing.Size(569, 237);
 			this.Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
 			this.Image.TabIndex = 0;
 			this.Image.TabStop = false;
 			// 
 			// Angle
 			// 
-			this.Angle.Location = new System.Drawing.Point(783, 15);
-			this.Angle.Margin = new System.Windows.Forms.Padding(4);
+			this.Angle.Location = new System.Drawing.Point(587, 12);
 			this.Angle.Maximum = 74;
 			this.Angle.Minimum = -75;
 			this.Angle.Name = "Angle";
-			this.Angle.Size = new System.Drawing.Size(189, 56);
+			this.Angle.Size = new System.Drawing.Size(142, 45);
 			this.Angle.TabIndex = 1;
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(783, 121);
-			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label1.Location = new System.Drawing.Point(587, 98);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(99, 17);
+			this.label1.Size = new System.Drawing.Size(75, 13);
 			this.label1.TabIndex = 2;
 			this.label1.Text = "Distance (cm):";
 			// 
 			// amount
 			// 
 			this.amount.AutoSize = true;
-			this.amount.Location = new System.Drawing.Point(848, 137);
-			this.amount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.amount.Location = new System.Drawing.Point(636, 111);
 			this.amount.Name = "amount";
-			this.amount.Size = new System.Drawing.Size(16, 17);
+			this.amount.Size = new System.Drawing.Size(13, 13);
 			this.amount.TabIndex = 3;
 			this.amount.Text = "0";
 			this.amount.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -83,34 +79,36 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(786, 165);
+			this.label2.Location = new System.Drawing.Point(587, 135);
+			this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(96, 17);
+			this.label2.Size = new System.Drawing.Size(75, 13);
 			this.label2.TabIndex = 4;
 			this.label2.Text = "Raw distance:";
 			// 
-			// label3
+			// rawAmount
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(848, 182);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(16, 17);
-			this.label3.TabIndex = 5;
-			this.label3.Text = "0";
+			this.rawAmount.AutoSize = true;
+			this.rawAmount.Location = new System.Drawing.Point(636, 148);
+			this.rawAmount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.rawAmount.Name = "rawAmount";
+			this.rawAmount.Size = new System.Drawing.Size(13, 13);
+			this.rawAmount.TabIndex = 5;
+			this.rawAmount.Text = "0";
+			this.rawAmount.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// DistanceSensorForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(988, 321);
-			this.Controls.Add(this.label3);
+			this.ClientSize = new System.Drawing.Size(741, 261);
+			this.Controls.Add(this.rawAmount);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.amount);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.Angle);
 			this.Controls.Add(this.Image);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "DistanceSensorForm";
 			this.Text = "DistanceSensor";
 			((System.ComponentModel.ISupportInitialize)(this.Image)).EndInit();
@@ -127,6 +125,6 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label amount;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label rawAmount;
 	}
 }
