@@ -29,8 +29,6 @@ namespace EmguLeap
 
 		public void UpdateImage(Bitmap image)
 		{
-
-
 			ImageHeight = image.Height;
 			ImageWidth = image.Width;
 
@@ -53,7 +51,8 @@ namespace EmguLeap
 
 		public float GetRawDistance(int x, int y)
 		{
-			return Map3D[y * ImageWidth + x].z;
+			//return Map3D[y * ImageWidth + x].z;
+			return Map3D[x * ImageHeight + y].z;
 		}
 
 		public float GetRawDistance(Point point)
