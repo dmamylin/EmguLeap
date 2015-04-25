@@ -15,28 +15,25 @@ namespace EmguLeap
 			Image.Image = image;
 		}
 
-		public void ChangeDistance(float cmDistance, float rawDistance)
+		public void ChangeDistance(float distance)
 		{
 			if (amount.InvokeRequired)
 			{
 				amount.Invoke(new MethodInvoker(delegate
 				{
-					amount.Text = cmDistance.ToString("F");
-					label3.Text = rawDistance.ToString("F");
+					amount.Text = distance.ToString("F");
 				}));
 			}
 			else
 			{
-				amount.Text = cmDistance.ToString("F");
-				label3.Text = rawDistance.ToString("F");
+				amount.Text = distance.ToString("F");
 			}
 		}
 
 		public double GetAngle()
 		{
 			var rawData = Angle.GetData();
-			var invertedData = rawData;
-			return invertedData;
+			return rawData;
 		}
 	}
 }
