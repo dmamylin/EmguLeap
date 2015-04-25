@@ -143,16 +143,16 @@ namespace EmguLeap
 		public float GetCmDistanceByAngle(double angle, Func<IterationRange2D, float> filter)
 		{
 			// TODO: validate angle
-			//var upperPoint = new Point(GetXByAngle(angle), 0);
-			//var bottomPoint = new Point(upperPoint.X, ImageHeight);
+			var upperPoint = new Point(GetXByAngle(angle), 0);
+			var bottomPoint = new Point(upperPoint.X, ImageHeight);
 
-			var centerX = GetXByAngle(angle);
-			var centerY = ImageHeight/2;
-			var upperLeftCorner = new Point(centerX - 5, centerY - 5);
-			var bottomRightCorner = new Point(centerX + 5, centerY + 5);
+			//var centerX = GetXByAngle(angle);
+			//var centerY = ImageHeight/2;
+			//var upperLeftCorner = new Point(centerX - 5, centerY - 5);
+			//var bottomRightCorner = new Point(centerX + 5, centerY + 5);
 
-			//return GetCmDistanceToVerticalLine(upperPoint, bottomPoint, filter);
-			return GetDistanceToRectangle(upperLeftCorner, bottomRightCorner, AverageFilterSimple);
+			return GetCmDistanceToVerticalLine(upperPoint, bottomPoint, filter);
+			//return GetDistanceToRectangle(upperLeftCorner, bottomRightCorner, AverageFilterSimple);
 		}
 
 		public float GetRawDistanceByAngle(double angle, Func<IterationRange2D, float> filter)
