@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Emgu.CV;
 using Emgu.CV.Structure;
@@ -41,6 +38,16 @@ namespace EmguLeap
 			mapy2 = new Matrix<float>(240, 640);
 			CvInvoke.cvInitUndistortRectifyMap(C1, D1, R1, P1, mapx1, mapy1);
 			CvInvoke.cvInitUndistortRectifyMap(C2, D2, R2, P2, mapx2, mapy2);
+
+			lut = new Matrix<byte>(new Size(1, 256));
+			for (int i = 0; i < 100; i++)
+			{
+				lut[i, 0] = 0;
+			}
+			for (int i = 100; i < 256; i++)
+			{
+				lut[i, 0] = (byte)i;
+			}
 		}
 
 		public Bitmap CalculateDisparity(Bitmap leftRaw, Bitmap rightRaw, DisparityOptions options)
@@ -50,9 +57,9 @@ namespace EmguLeap
 
 			var left = new Image<Gray, byte>(new Size(640, 240));
 			var right = new Image<Gray, byte>(new Size(640, 240));
-			CvInvoke.cvRemap(new Image<Gray, byte>(leftRaw), left, mapx1, mapy1,1, new MCvScalar(0));
-			CvInvoke.cvRemap(new Image<Gray, byte>(rightRaw), right, mapx2, mapy2,1, new MCvScalar(0));
-			
+			CvInvoke.cvRemap(new Image<Gray, byte>(leftRaw), left, mapx1, mapy1, 1, new MCvScalar(0));
+			CvInvoke.cvRemap(new Image<Gray, byte>(rightRaw), right, mapx2, mapy2, 1, new MCvScalar(0));
+
 			Size size = left.Size;
 			var disparityMap = new Image<Gray, short>(size);
 			using (var stereoSolver = new StereoSGBM(options.minDispatities,
@@ -69,29 +76,24 @@ namespace EmguLeap
 			{
 				stereoSolver.FindStereoCorrespondence(left, right, disparityMap);
 			}
+
+
+
 			sw.Stop();
-			Console.WriteLine("{0} ms fo sgbm computation.",sw.ElapsedMilliseconds);
+			Console.WriteLine("{0} ms fo sgbm computation.", sw.ElapsedMilliseconds);
 
-			return disparityMap.ToBitmap();
+			var res = disparityMap.Convert<Gray, byte>();
+			CvInvoke.cvLUT(res, res, lut);
+			return res.ToBitmap();
 
-
-			//using (StereoSGBM solver = new StereoSGBM(-64,
-			//	192,
-			//	5,
-			//	600,
-			//	2400,
-			//	10,
-			//	4,
-			//	1,
-			//	150,
-			//	2,
-			//	StereoSGBM.Mode.SGBM))
 		}
 
 		private Matrix<float> mapx1;
 		private Matrix<float> mapy1;
 		private Matrix<float> mapx2;
 		private Matrix<float> mapy2;
+
+		private Matrix<byte> lut;
 	}
 
 	public class DisparityOptions
@@ -103,7 +105,7 @@ namespace EmguLeap
 			numDisparities = numD;
 			minDispatities = minD;
 			SAD = sad;
-			P1 =  SAD * SAD;
+			P1 = SAD * SAD;
 			P2 = 512 * 1 * SAD * SAD;
 			disp12MaxDiff = disp12;
 			PreFilterCap = preFilter;

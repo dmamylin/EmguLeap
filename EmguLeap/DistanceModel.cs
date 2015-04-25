@@ -100,6 +100,6 @@ namespace EmguLeap
 		private ImageProvider provider;
 		private DistanceCalculator calculator;
 
-		private const int N = 2;
+		private const int N = 1;
 	}
 }

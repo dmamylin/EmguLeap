@@ -15,18 +15,30 @@ namespace EmguLeap
 			Image.Image = image;
 		}
 
-		public void ChangeDistance(float distance)
+		public void ChangeDistance(float cm,float raw)
 		{
 			if (amount.InvokeRequired)
 			{
 				amount.Invoke(new MethodInvoker(delegate
 				{
-					amount.Text = distance.ToString("F");
+					amount.Text = cm.ToString("F");
 				}));
 			}
 			else
 			{
-				amount.Text = distance.ToString("F");
+				amount.Text = cm.ToString("F");
+			}
+
+			if (rawAmount.InvokeRequired)
+			{
+				rawAmount.Invoke(new MethodInvoker(delegate
+				{
+					rawAmount.Text = raw.ToString("F");
+				}));
+			}
+			else
+			{
+				rawAmount.Text = raw.ToString("F");
 			}
 		}
 
