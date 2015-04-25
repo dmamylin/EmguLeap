@@ -35,8 +35,25 @@ namespace EmguLeap
 		private void CalculateDistance()
 		{
 			var angle = distanceForm.GetAngle();
-			calculator.UpdateImage(Average.ToBitmap());
-			calculator.GetDistanceByAngle(angle, calculator.AverageFilter);
+			var average = Average.ToBitmap();
+			var imageWithLine = DrawThinRedLine(average, angle);
+			distanceForm.ChangeImage(imageWithLine);
+			calculator.UpdateImage(average);
+			var distance = calculator.GetDistanceByAngle(angle, calculator.AverageFilter);
+			distanceForm.ChangeDistance(distance);
+		}
+
+		private Bitmap DrawThinRedLine(Bitmap image, double angle)
+		{
+			var dx = (int)Math.Floor(image.Width * angle / 150);
+			var x = image.Width / 2 + dx;
+			var tempBitmap = new Bitmap(image.Width, image.Height);
+			using (Graphics g = Graphics.FromImage(tempBitmap))
+			{
+				g.DrawImage(image, 0, 0);
+				g.DrawLine(Pens.Red, x, 0, x, image.Height);
+			}
+			return tempBitmap;
 		}
 
 		private void UpdateBuffer(Bitmap disparityIm)
@@ -47,7 +64,6 @@ namespace EmguLeap
 			{
 				Average = GetAverage(Buffer);
 				Buffer = new List<Image<Gray, byte>>();
-				distanceForm.ChangeImage(Average.ToBitmap());
 				OnNewAverageImage();
 			}
 		}
@@ -73,7 +89,7 @@ namespace EmguLeap
 		private Action<Bitmap> OnNewDisparityImage;
 		private Action OnNewAverageImage;
 
-		private List<Image<Gray, byte>> Buffer =  new List<Image<Gray, byte>>();
+		private List<Image<Gray, byte>> Buffer = new List<Image<Gray, byte>>();
 		private Image<Gray, byte> Average;
 
 		private DistanceSensorForm distanceForm;
