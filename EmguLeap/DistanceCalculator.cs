@@ -19,6 +19,7 @@ namespace EmguLeap
 		private int ImageWidth;
 		private Matrix<double> matrixQ;
 		private const float MaxZ = 2.0f;
+		private const float MinZ = 0.1f;
 		private const float HorizontalFOV = 150.0f; // Degrees
 
 		public DistanceCalculator()
@@ -51,7 +52,6 @@ namespace EmguLeap
 
 		public float GetRawDistance(int x, int y)
 		{
-			//return Map3D[y * ImageWidth + x].z;
 			return Map3D[x * ImageHeight + y].z;
 		}
 
@@ -91,36 +91,64 @@ namespace EmguLeap
 			return RawDistanceToCm(distance);
 		}
 
-		private float GetDistanceToVerticalLine(Point upperPoint, Point bottomPoint, Func<IterationRange2D, float> filter)
+		private float GetCmDistanceToVerticalLine(Point upperPoint, Point bottomPoint, Func<IterationRange2D, float> filter)
 		{
 			var iterationRange =
-				new IterationRange2D(new Point(upperPoint.X, upperPoint.X + 1), new Point(upperPoint.Y, bottomPoint.X));
+				new IterationRange2D(new Point(upperPoint.X, upperPoint.X + 1), new Point(upperPoint.Y, bottomPoint.Y));
 			var rawDistance = filter(iterationRange);
 
 			return RawDistanceToCm(rawDistance);
 		}
 
+		private float GetRawDistanceToVerticalLine(Point upperPoint, Point bottomPoint, Func<IterationRange2D, float> filter)
+		{
+			var iterationRange =
+				new IterationRange2D(new Point(upperPoint.X, upperPoint.X + 1), new Point(upperPoint.Y, bottomPoint.Y));
+			var rawDistance = filter(iterationRange);
+
+			return rawDistance;
+		}
+
 		public float AverageFilter(IterationRange2D iterationRange)
 		{
 			var sumOfDistances = 0.0f;
+			var totalCount = 0;
 
 			for (var x = iterationRange.StartX; x < iterationRange.EndX; x++)
 				for (var y = iterationRange.StartY; y < iterationRange.EndY; y++)
-					sumOfDistances += Math.Min(GetRawDistance(x, y), MaxZ);
+				{
+					var distanceToPoint = GetRawDistance(x, y);
+					if (distanceToPoint <= MaxZ && distanceToPoint >= MinZ)
+					{
+						totalCount++;
+						sumOfDistances += distanceToPoint;
+					}
+				}
 
-			return sumOfDistances / iterationRange.TotalCount;
+			return totalCount != 0 ? sumOfDistances / totalCount : RawDistanceToCm(MaxZ);
 		}
 
-		public float GetDistanceByAngle(double angle, Func<IterationRange2D, float> filter)
+		public float GetCmDistanceByAngle(double angle, Func<IterationRange2D, float> filter)
 		{
 			// TODO: validate angle
-
-			var midX = ImageWidth / 2;
-			var dx = (int)Math.Floor(2 * midX * angle / HorizontalFOV);
-			var upperPoint = new Point(midX - dx, 0);
+			var upperPoint = new Point(GetXByAngle(angle), 0);
 			var bottomPoint = new Point(upperPoint.X, ImageHeight);
 
-			return GetDistanceToVerticalLine(upperPoint, bottomPoint, filter);
+			return GetCmDistanceToVerticalLine(upperPoint, bottomPoint, filter);
+		}
+
+		public float GetRawDistanceByAngle(double angle, Func<IterationRange2D, float> filter)
+		{
+			var upperPoint = new Point(GetXByAngle(angle), 0);
+			var bottomPoint = new Point(upperPoint.X, ImageHeight);
+
+			return GetRawDistanceToVerticalLine(upperPoint, bottomPoint, filter);
+		}
+
+		private int GetXByAngle(double angle)
+		{
+			var midX = ImageWidth / 2;
+			return (int)Math.Floor(midX - 2 * midX * angle / HorizontalFOV);
 		}
 
 		public class IterationRange2D

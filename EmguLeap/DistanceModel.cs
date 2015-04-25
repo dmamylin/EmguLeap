@@ -39,8 +39,10 @@ namespace EmguLeap
 			var imageWithLine = DrawThinRedLine(average, angle);
 			distanceForm.ChangeImage(imageWithLine);
 			calculator.UpdateImage(average);
-			var distance = calculator.GetDistanceByAngle(angle, calculator.AverageFilter);
-			distanceForm.ChangeDistance(distance);
+			var cmDistance = calculator.GetCmDistanceByAngle(angle, calculator.AverageFilter);
+			var rawDistance = calculator.GetRawDistanceByAngle(angle, calculator.AverageFilter);
+
+			distanceForm.ChangeDistance(cmDistance, rawDistance);
 		}
 
 		private Bitmap DrawThinRedLine(Bitmap image, double angle)

@@ -32,6 +32,8 @@
 			this.Angle = new System.Windows.Forms.TrackBar();
 			this.label1 = new System.Windows.Forms.Label();
 			this.amount = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.Image)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Angle)).BeginInit();
 			this.SuspendLayout();
@@ -63,9 +65,9 @@
 			this.label1.Location = new System.Drawing.Point(783, 121);
 			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(81, 17);
+			this.label1.Size = new System.Drawing.Size(99, 17);
 			this.label1.TabIndex = 2;
-			this.label1.Text = "Distance is:";
+			this.label1.Text = "Distance (cm):";
 			// 
 			// amount
 			// 
@@ -78,11 +80,31 @@
 			this.amount.Text = "0";
 			this.amount.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(786, 165);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(96, 17);
+			this.label2.TabIndex = 4;
+			this.label2.Text = "Raw distance:";
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(848, 182);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(16, 17);
+			this.label3.TabIndex = 5;
+			this.label3.Text = "0";
+			// 
 			// DistanceSensorForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(988, 321);
+			this.Controls.Add(this.label3);
+			this.Controls.Add(this.label2);
 			this.Controls.Add(this.amount);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.Angle);
@@ -104,5 +126,7 @@
 		private System.Windows.Forms.TrackBar Angle;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label amount;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label3;
 	}
 }
