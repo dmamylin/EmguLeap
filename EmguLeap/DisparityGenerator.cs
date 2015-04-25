@@ -38,6 +38,16 @@ namespace EmguLeap
 			mapy2 = new Matrix<float>(240, 640);
 			CvInvoke.cvInitUndistortRectifyMap(C1, D1, R1, P1, mapx1, mapy1);
 			CvInvoke.cvInitUndistortRectifyMap(C2, D2, R2, P2, mapx2, mapy2);
+
+			lut = new Matrix<byte>(new Size(1, 256));
+			for (int i = 0; i < 100; i++)
+			{
+				lut[i, 0] = 0;
+			}
+			for (int i = 100; i < 256; i++)
+			{
+				lut[i, 0] = (byte)i;
+			}
 		}
 
 		public Bitmap CalculateDisparity(Bitmap leftRaw, Bitmap rightRaw, DisparityOptions options)
@@ -68,15 +78,13 @@ namespace EmguLeap
 			}
 
 
-			var byteDisparity = disparityMap.Convert<Gray, byte>();
-
-			CvInvoke.cvFastNlMeansDenoising(byteDisparity, byteDisparity, 3, 7, 21);
 
 			sw.Stop();
 			Console.WriteLine("{0} ms fo sgbm computation.", sw.ElapsedMilliseconds);
 
-
-			return byteDisparity.ToBitmap();
+			var res = disparityMap.Convert<Gray, byte>();
+			CvInvoke.cvLUT(res, res, lut);
+			return res.ToBitmap();
 
 		}
 
@@ -84,6 +92,8 @@ namespace EmguLeap
 		private Matrix<float> mapy1;
 		private Matrix<float> mapx2;
 		private Matrix<float> mapy2;
+
+		private Matrix<byte> lut;
 	}
 
 	public class DisparityOptions
