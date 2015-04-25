@@ -73,12 +73,20 @@
   <ItemGroup>
     <Compile Include="DisparityGeneratorGC.cs" />
     <Compile Include="DisparityGenerator.cs" />
+    <Compile Include="DisparityOptionsGenerator.cs" />
     <Compile Include="DistanceCalculator.cs" />
+    <Compile Include="DistanceModel.cs" />
     <Compile Include="Distances.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Distances.Designer.cs">
       <DependentUpon>Distances.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DistanceSensorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DistanceSensorForm.Designer.cs">
+      <DependentUpon>DistanceSensorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="ImageForm.cs">
@@ -191,6 +199,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Distances.resx">
       <DependentUpon>Distances.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DistanceSensorForm.resx">
+      <DependentUpon>DistanceSensorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageForm.resx">
       <DependentUpon>ImageForm.cs</DependentUpon>

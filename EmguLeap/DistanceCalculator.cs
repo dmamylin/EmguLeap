@@ -98,10 +98,10 @@ namespace EmguLeap
 			return sumOfDistances/iterationRange.TotalCount;
 		}
 
-		public float KalmanFilter(IterationRange2D iterationRange)
-		{
-			Kalman
-		}
+		//public float KalmanFilter(IterationRange2D iterationRange)
+		//{
+		//	Kalman
+		//}
 
 		public class IterationRange2D
 		{
