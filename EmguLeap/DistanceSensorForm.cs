@@ -33,8 +33,7 @@ namespace EmguLeap
 		public double GetAngle()
 		{
 			var rawData = Angle.GetData();
-			var invertedData = -rawData;
-			return invertedData;
+			return rawData;
 		}
 	}
 }
