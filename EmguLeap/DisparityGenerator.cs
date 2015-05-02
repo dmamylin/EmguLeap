@@ -40,11 +40,11 @@ namespace EmguLeap
 			CvInvoke.cvInitUndistortRectifyMap(C2, D2, R2, P2, mapx2, mapy2);
 
 			lut = new Matrix<byte>(new Size(1, 256));
-			for (int i = 0; i < 100; i++)
+			for (int i = 0; i < 50; i++)
 			{
 				lut[i, 0] = 0;
 			}
-			for (int i = 100; i < 256; i++)
+			for (int i = 50; i < 256; i++)
 			{
 				lut[i, 0] = (byte)i;
 			}
