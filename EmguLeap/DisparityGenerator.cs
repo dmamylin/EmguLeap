@@ -12,8 +12,7 @@ namespace EmguLeap
 	{
 		public DisparityGenerator()
 		{
-			XDocument xDoc;
-			xDoc = XDocument.Load("..\\..\\CalibrationData\\Q.xml");
+			var xDoc = XDocument.Load("..\\..\\CalibrationData\\Q.xml");
 			var Q = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
 			xDoc = XDocument.Load("..\\..\\CalibrationData\\C1.xml");
 			var C1 = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
@@ -40,11 +39,11 @@ namespace EmguLeap
 			CvInvoke.cvInitUndistortRectifyMap(C2, D2, R2, P2, mapx2, mapy2);
 
 			lut = new Matrix<byte>(new Size(1, 256));
-			for (int i = 0; i < 50; i++)
+			for (var i = 0; i < 50; i++)
 			{
 				lut[i, 0] = 0;
 			}
-			for (int i = 50; i < 256; i++)
+			for (var i = 50; i < 256; i++)
 			{
 				lut[i, 0] = (byte)i;
 			}
@@ -60,7 +59,7 @@ namespace EmguLeap
 			CvInvoke.cvRemap(new Image<Gray, byte>(leftRaw), left, mapx1, mapy1, 1, new MCvScalar(0));
 			CvInvoke.cvRemap(new Image<Gray, byte>(rightRaw), right, mapx2, mapy2, 1, new MCvScalar(0));
 
-			Size size = left.Size;
+			var size = left.Size;
 			var disparityMap = new Image<Gray, short>(size);
 			using (var stereoSolver = new StereoSGBM(options.minDispatities,
 				options.numDisparities,
@@ -88,12 +87,12 @@ namespace EmguLeap
 
 		}
 
-		private Matrix<float> mapx1;
-		private Matrix<float> mapy1;
-		private Matrix<float> mapx2;
-		private Matrix<float> mapy2;
+		private readonly Matrix<float> mapx1;
+		private readonly Matrix<float> mapy1;
+		private readonly Matrix<float> mapx2;
+		private readonly Matrix<float> mapy2;
 
-		private Matrix<byte> lut;
+		private readonly Matrix<byte> lut;
 	}
 
 	public class DisparityOptions

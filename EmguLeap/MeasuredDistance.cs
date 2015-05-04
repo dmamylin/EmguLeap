@@ -1,4 +1,6 @@
-﻿namespace EmguLeap
+﻿using Leap;
+
+namespace EmguLeap
 {
 	// TODO: inherit from DoubleBasedScalar
 	public class MeasuredDistance

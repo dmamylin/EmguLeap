@@ -6,7 +6,7 @@ namespace EmguLeap
 	{
 		public static int GetData(this TrackBar trackBar)
 		{
-			int res = 0;
+			var res = 0;
 			if (trackBar.InvokeRequired)
 			{
 				trackBar.Invoke(new MethodInvoker(delegate { res = trackBar.Value; }));

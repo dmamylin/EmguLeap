@@ -6,6 +6,8 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
 
+// TODO: delete this file after code decomposition
+
 namespace EmguLeap
 {
 	public class DistanceCalculator

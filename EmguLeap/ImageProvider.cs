@@ -9,8 +9,8 @@ namespace EmguLeap
 {
 	class ImageProvider
 	{
-		private Controller controller;
-		private ImageListener listener;
+		private readonly Controller controller;
+		private readonly ImageListener listener;
 
 		public ImageProvider()
 		{
@@ -68,15 +68,15 @@ namespace EmguLeap
 		public static Bitmap Convert(Leap.Image image)
 		{
 			var bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format8bppIndexed);
-			ColorPalette grayscale = bitmap.Palette;
-			for (int i = 0; i < 256; i++)
+			var grayscale = bitmap.Palette;
+			for (var i = 0; i < 256; i++)
 			{
 				grayscale.Entries[i] = Color.FromArgb((int)255, i, i, i);
 			}
 			bitmap.Palette = grayscale;
-			Rectangle lockArea = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-			BitmapData bitmapData = bitmap.LockBits(lockArea, ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
-			byte[] rawImageData = image.Data;
+			var lockArea = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+			var bitmapData = bitmap.LockBits(lockArea, ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
+			var rawImageData = image.Data;
 			System.Runtime.InteropServices.Marshal.Copy(rawImageData, 0, bitmapData.Scan0, image.Width * image.Height);
 			bitmap.UnlockBits(bitmapData);
 			return bitmap;

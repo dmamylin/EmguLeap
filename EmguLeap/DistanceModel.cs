@@ -10,39 +10,39 @@ namespace EmguLeap
 	{
 		public DistanceModel()
 		{
-			distanceForm = new DistanceSensorForm();
+			DistanceForm = new DistanceSensorForm();
 
-			provider = new ImageProvider();
-			generator = new DisparityGenerator();
-			calculator = new DistanceCalculator();
+			ImageProvider provider = new ImageProvider();
+			Generator = new DisparityGenerator();
+			Calculator = new DistanceCalculator();
 
 			provider.AddNewAction(UpdateDisparity);
 			OnNewDisparityImage += UpdateBuffer;
 			OnNewAverageImage += CalculateDistance;
 
-			distanceForm.Visible = true;
+			DistanceForm.Visible = true;
 		}
 
 		private void UpdateDisparity(Bitmap[] images)
 		{
 			var leftIm = images[0];
 			var rightIm = images[1];
-			var disparityIm = generator.CalculateDisparity(leftIm, rightIm, DisparityOptionsGenerator.GetOptions());
+			var disparityIm = Generator.CalculateDisparity(leftIm, rightIm, DisparityOptionsGenerator.GetOptions());
 
 			OnNewDisparityImage((Bitmap)disparityIm.Clone());
 		}
 
 		private void CalculateDistance()
 		{
-			var angle = distanceForm.GetAngle();
+			var angle = DistanceForm.GetAngle();
 			var average = Average.ToBitmap();
 			var imageWithLine = DrawThinRedLine(average, angle);
-			distanceForm.ChangeImage(imageWithLine);
-			calculator.UpdateImage(average);
-			var cmDistance = calculator.GetCmDistanceByAngle(angle, calculator.AverageFilterAdaptive);
-			var rawDistance = calculator.GetRawDistanceByAngle(angle, calculator.AverageFilterAdaptive);
+			DistanceForm.ChangeImage(imageWithLine);
+			Calculator.UpdateImage(average);
+			var cmDistance = Calculator.GetCmDistanceByAngle(angle, Calculator.AverageFilterAdaptive);
+			var rawDistance = Calculator.GetRawDistanceByAngle(angle, Calculator.AverageFilterAdaptive);
 
-			distanceForm.ChangeDistance(cmDistance, rawDistance);
+			DistanceForm.ChangeDistance(cmDistance, rawDistance);
 		}
 
 		private Bitmap DrawThinRedLine(Bitmap image, double angle)
@@ -89,17 +89,16 @@ namespace EmguLeap
 			return new Image<Gray, byte>(res);
 		}
 
-		private Action<Bitmap> OnNewDisparityImage;
-		private Action OnNewAverageImage;
+		private readonly Action<Bitmap> OnNewDisparityImage;
+		private readonly Action OnNewAverageImage;
 
 		private List<Image<Gray, byte>> Buffer = new List<Image<Gray, byte>>();
 		private Image<Gray, byte> Average;
 
-		private DistanceSensorForm distanceForm;
+		private readonly DistanceSensorForm DistanceForm;
 
-		private DisparityGenerator generator;
-		private ImageProvider provider;
-		private DistanceCalculator calculator;
+		private readonly DisparityGenerator Generator;
+		private readonly DistanceCalculator Calculator;
 
 		private const int N = 1;
 	}
