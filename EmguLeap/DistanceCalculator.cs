@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
-using System.Linq;
-using System.Windows.Forms.VisualStyles;
 using System.Xml.Linq;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
-using Leap;
 
 namespace EmguLeap
 {
