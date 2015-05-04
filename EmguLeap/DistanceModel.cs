@@ -70,6 +70,7 @@ namespace EmguLeap
 			}
 		}
 
+		// TODO: WTF? Divided by 1? Seriously???
 		private Image<Gray, byte> GetAverage(List<Image<Gray, byte>> images)
 		{
 			var height = images[0].Height;
@@ -81,7 +82,7 @@ namespace EmguLeap
 				{
 					for (int i = 0; i < width; i++)
 					{
-						res[j, i, 0] += (byte)(image.Data[j, i, 0] / N);
+						res[j, i, 0] += (byte)(image.Data[j, i, 0] / N); // Hey, TODO! Yeah, exactly!
 					}
 				}
 			}

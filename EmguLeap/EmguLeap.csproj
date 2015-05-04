@@ -92,7 +92,9 @@
       <DependentUpon>ImageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageProvider.cs" />
+    <Compile Include="MeasuredDistance.cs" />
     <Compile Include="Model.cs" />
+    <Compile Include="PointCloud.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs">
