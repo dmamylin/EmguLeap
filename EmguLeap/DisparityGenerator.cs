@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Xml.Linq;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using Emgu.Util;
 
 namespace EmguLeap
 {
@@ -16,6 +14,7 @@ namespace EmguLeap
 			Mapy1 = new Matrix<float>(240, 640);
 			Mapx2 = new Matrix<float>(240, 640);
 			Mapy2 = new Matrix<float>(240, 640);
+
 			CvInvoke.cvInitUndistortRectifyMap(matrixLoader.C1, matrixLoader.D1, matrixLoader.R1, matrixLoader.P1, Mapx1, Mapy1);
 			CvInvoke.cvInitUndistortRectifyMap(matrixLoader.C2, matrixLoader.D2, matrixLoader.R2, matrixLoader.P2, Mapx2, Mapy2);
 
@@ -42,12 +41,12 @@ namespace EmguLeap
 
 			var size = left.Size;
 			var disparityMap = new Image<Gray, short>(size);
-			using (var stereoSolver = new StereoSGBM(options.minDispatities,
-				options.numDisparities,
+			using (var stereoSolver = new StereoSGBM(options.MinDispatities,
+				options.NumDisparities,
 				options.SAD,
 				options.P1,
 				options.P2,
-				options.disp12MaxDiff,
+				options.Disp12MaxDiff,
 				options.PreFilterCap,
 				options.UniquenessRatio,
 				options.Speckle,
@@ -82,29 +81,29 @@ namespace EmguLeap
 			int speckleRange)
 		{
 
-			numDisparities = numD;
-			minDispatities = minD;
+			NumDisparities = numD;
+			MinDispatities = minD;
 			SAD = sad;
 			P1 = SAD * SAD;
 			P2 = 512 * 1 * SAD * SAD;
-			disp12MaxDiff = disp12;
+			Disp12MaxDiff = disp12;
 			PreFilterCap = preFilter;
 			UniquenessRatio = uniqRatio;
 			Speckle = speckle;
 			SpeckleRange = speckleRange;
-			fullDP = true;
+			FullDp = true;
 		}
 
-		public int numDisparities;
-		public int minDispatities;
+		public int NumDisparities;
+		public int MinDispatities;
 		public int SAD;
 		public int P1;
 		public int P2;
-		public int disp12MaxDiff;
+		public int Disp12MaxDiff;
 		public int PreFilterCap;
 		public int UniquenessRatio;
 		public int Speckle;
-		public bool fullDP;
+		public bool FullDp;
 		public int SpeckleRange;
 	}
 }

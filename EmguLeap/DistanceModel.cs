@@ -10,15 +10,11 @@ namespace EmguLeap
 	{
 		private readonly Action<Bitmap> OnNewDisparityImage;
 
-		private List<Image<Gray, byte>> Buffer = new List<Image<Gray, byte>>();
-
 		private readonly DistanceSensorForm DistanceForm;
 
 		private readonly DisparityGenerator Generator;
 		private readonly CalibrationMatrixLoader MatrixLoader;
 		private readonly ImageProvider Provider;
-
-		private const int N = 1;
 		
 		public DistanceModel()
 		{
