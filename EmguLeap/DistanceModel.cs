@@ -22,7 +22,7 @@ namespace EmguLeap
 		private readonly ImageProvider Provider;
 
 		private const int N = 1;
-
+		
 		public DistanceModel()
 		{
 			DistanceForm = new DistanceSensorForm();
