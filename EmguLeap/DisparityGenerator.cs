@@ -10,42 +10,23 @@ namespace EmguLeap
 {
 	class DisparityGenerator
 	{
-		public DisparityGenerator()
+		public DisparityGenerator(CalibrationMatrixLoader matrixLoader)
 		{
-			var xDoc = XDocument.Load("..\\..\\CalibrationData\\Q.xml");
-			var Q = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
-			xDoc = XDocument.Load("..\\..\\CalibrationData\\C1.xml");
-			var C1 = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
-			xDoc = XDocument.Load("..\\..\\CalibrationData\\C2.xml");
-			var C2 = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
-			xDoc = XDocument.Load("..\\..\\CalibrationData\\D1.xml");
-			var D1 = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
-			xDoc = XDocument.Load("..\\..\\CalibrationData\\D2.xml");
-			var D2 = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
-			xDoc = XDocument.Load("..\\..\\CalibrationData\\R1.xml");
-			var R1 = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
-			xDoc = XDocument.Load("..\\..\\CalibrationData\\R2.xml");
-			var R2 = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
-			xDoc = XDocument.Load("..\\..\\CalibrationData\\P1.xml");
-			var P1 = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
-			xDoc = XDocument.Load("..\\..\\CalibrationData\\P2.xml");
-			var P2 = Toolbox.XmlDeserialize<Matrix<double>>(xDoc);
+			Mapx1 = new Matrix<float>(240, 640);
+			Mapy1 = new Matrix<float>(240, 640);
+			Mapx2 = new Matrix<float>(240, 640);
+			Mapy2 = new Matrix<float>(240, 640);
+			CvInvoke.cvInitUndistortRectifyMap(matrixLoader.C1, matrixLoader.D1, matrixLoader.R1, matrixLoader.P1, Mapx1, Mapy1);
+			CvInvoke.cvInitUndistortRectifyMap(matrixLoader.C2, matrixLoader.D2, matrixLoader.R2, matrixLoader.P2, Mapx2, Mapy2);
 
-			mapx1 = new Matrix<float>(240, 640);
-			mapy1 = new Matrix<float>(240, 640);
-			mapx2 = new Matrix<float>(240, 640);
-			mapy2 = new Matrix<float>(240, 640);
-			CvInvoke.cvInitUndistortRectifyMap(C1, D1, R1, P1, mapx1, mapy1);
-			CvInvoke.cvInitUndistortRectifyMap(C2, D2, R2, P2, mapx2, mapy2);
-
-			lut = new Matrix<byte>(new Size(1, 256));
+			Lut = new Matrix<byte>(new Size(1, 256));
 			for (var i = 0; i < 50; i++)
 			{
-				lut[i, 0] = 0;
+				Lut[i, 0] = 0;
 			}
 			for (var i = 50; i < 256; i++)
 			{
-				lut[i, 0] = (byte)i;
+				Lut[i, 0] = (byte)i;
 			}
 		}
 
@@ -56,8 +37,8 @@ namespace EmguLeap
 
 			var left = new Image<Gray, byte>(new Size(640, 240));
 			var right = new Image<Gray, byte>(new Size(640, 240));
-			CvInvoke.cvRemap(new Image<Gray, byte>(leftRaw), left, mapx1, mapy1, 1, new MCvScalar(0));
-			CvInvoke.cvRemap(new Image<Gray, byte>(rightRaw), right, mapx2, mapy2, 1, new MCvScalar(0));
+			CvInvoke.cvRemap(new Image<Gray, byte>(leftRaw), left, Mapx1, Mapy1, 1, new MCvScalar(0));
+			CvInvoke.cvRemap(new Image<Gray, byte>(rightRaw), right, Mapx2, Mapy2, 1, new MCvScalar(0));
 
 			var size = left.Size;
 			var disparityMap = new Image<Gray, short>(size);
@@ -82,17 +63,17 @@ namespace EmguLeap
 			Console.WriteLine("{0} ms fo sgbm computation.", sw.ElapsedMilliseconds);
 
 			var res = disparityMap.Convert<Gray, byte>();
-			CvInvoke.cvLUT(res, res, lut);
+			CvInvoke.cvLUT(res, res, Lut);
 			return res.ToBitmap();
 
 		}
 
-		private readonly Matrix<float> mapx1;
-		private readonly Matrix<float> mapy1;
-		private readonly Matrix<float> mapx2;
-		private readonly Matrix<float> mapy2;
+		private readonly Matrix<float> Mapx1;
+		private readonly Matrix<float> Mapy1;
+		private readonly Matrix<float> Mapx2;
+		private readonly Matrix<float> Mapy2;
 
-		private readonly Matrix<byte> lut;
+		private readonly Matrix<byte> Lut;
 	}
 
 	public class DisparityOptions

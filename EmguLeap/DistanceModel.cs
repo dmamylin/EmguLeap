@@ -8,15 +8,31 @@ namespace EmguLeap
 {
 	class DistanceModel
 	{
+		private readonly Action<Bitmap> OnNewDisparityImage;
+		private readonly Action OnNewAverageImage;
+
+		private List<Image<Gray, byte>> Buffer = new List<Image<Gray, byte>>();
+		private Image<Gray, byte> Average;
+
+		private readonly DistanceSensorForm DistanceForm;
+
+		private readonly DisparityGenerator Generator;
+		private readonly DistanceCalculator Calculator;
+		private readonly CalibrationMatrixLoader MatrixLoader;
+		private readonly ImageProvider Provider;
+
+		private const int N = 1;
+
 		public DistanceModel()
 		{
 			DistanceForm = new DistanceSensorForm();
 
-			ImageProvider provider = new ImageProvider();
-			Generator = new DisparityGenerator();
+			MatrixLoader = new CalibrationMatrixLoader();
+			Provider = new ImageProvider();
+			Generator = new DisparityGenerator(MatrixLoader);
 			Calculator = new DistanceCalculator();
 
-			provider.AddNewAction(UpdateDisparity);
+			Provider.AddNewAction(UpdateDisparity);
 			OnNewDisparityImage += UpdateBuffer;
 			OnNewAverageImage += CalculateDistance;
 
@@ -78,9 +94,9 @@ namespace EmguLeap
 			var res = new byte[height, width, 1];
 			foreach (var image in images)
 			{
-				for (int j = 0; j < height; j++)
+				for (var j = 0; j < height; j++)
 				{
-					for (int i = 0; i < width; i++)
+					for (var i = 0; i < width; i++)
 					{
 						res[j, i, 0] += (byte)(image.Data[j, i, 0] / N); // Hey, TODO! Yeah, exactly!
 					}
@@ -88,18 +104,5 @@ namespace EmguLeap
 			}
 			return new Image<Gray, byte>(res);
 		}
-
-		private readonly Action<Bitmap> OnNewDisparityImage;
-		private readonly Action OnNewAverageImage;
-
-		private List<Image<Gray, byte>> Buffer = new List<Image<Gray, byte>>();
-		private Image<Gray, byte> Average;
-
-		private readonly DistanceSensorForm DistanceForm;
-
-		private readonly DisparityGenerator Generator;
-		private readonly DistanceCalculator Calculator;
-
-		private const int N = 1;
 	}
 }

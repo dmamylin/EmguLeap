@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalibrationMatrixLoader.cs" />
     <Compile Include="DisparityGeneratorGC.cs" />
     <Compile Include="DisparityGenerator.cs" />
     <Compile Include="DisparityOptionsGenerator.cs" />
