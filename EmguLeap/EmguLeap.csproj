@@ -71,14 +71,7 @@
     <Compile Include="DisparityGeneratorGC.cs" />
     <Compile Include="DisparityGenerator.cs" />
     <Compile Include="DisparityOptionsGenerator.cs" />
-    <Compile Include="DistanceCalculator.cs" />
     <Compile Include="DistanceModel.cs" />
-    <Compile Include="Distances.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Distances.Designer.cs">
-      <DependentUpon>Distances.cs</DependentUpon>
-    </Compile>
     <Compile Include="DistanceSensorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,8 +86,6 @@
       <DependentUpon>ImageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageProvider.cs" />
-    <Compile Include="MeasuredDistance.cs" />
-    <Compile Include="PointCloud.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs">
@@ -103,15 +94,13 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Distances.resx">
-      <DependentUpon>Distances.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DistanceSensorForm.resx">
       <DependentUpon>DistanceSensorForm.cs</DependentUpon>
     </EmbeddedResource>

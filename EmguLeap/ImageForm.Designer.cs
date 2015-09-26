@@ -1,4 +1,6 @@
-﻿namespace EmguLeap
+﻿using System.Drawing;
+
+namespace EmguLeap
 {
 	partial class ImageForm
 	{
@@ -28,56 +30,60 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.left = new System.Windows.Forms.PictureBox();
-			this.right = new System.Windows.Forms.PictureBox();
-			this.disparity = new System.Windows.Forms.PictureBox();
-			((System.ComponentModel.ISupportInitialize)(this.left)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.right)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.disparity)).BeginInit();
-			this.SuspendLayout();
-			// 
-			// left
-			// 
-			this.left.Location = new System.Drawing.Point(12, 12);
-			this.left.Name = "left";
-			this.left.Size = new System.Drawing.Size(342, 215);
-			this.left.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-			this.left.TabIndex = 0;
-			this.left.TabStop = false;
-			// 
-			// right
-			// 
-			this.right.Location = new System.Drawing.Point(379, 12);
-			this.right.Name = "right";
-			this.right.Size = new System.Drawing.Size(342, 215);
-			this.right.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-			this.right.TabIndex = 1;
-			this.right.TabStop = false;
-			// 
-			// disparity
-			// 
-			this.disparity.Location = new System.Drawing.Point(12, 233);
-			this.disparity.Name = "disparity";
-			this.disparity.Size = new System.Drawing.Size(709, 215);
-			this.disparity.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-			this.disparity.TabIndex = 2;
-			this.disparity.TabStop = false;
-			// 
-			// ImageForm
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(733, 468);
-			this.Controls.Add(this.disparity);
-			this.Controls.Add(this.right);
-			this.Controls.Add(this.left);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Name = "ImageForm";
-			this.Text = "ImageForm";
-			((System.ComponentModel.ISupportInitialize)(this.left)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.right)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.disparity)).EndInit();
-			this.ResumeLayout(false);
+            this.left = new System.Windows.Forms.PictureBox();
+            this.right = new System.Windows.Forms.PictureBox();
+            this.disparity = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.left)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.right)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.disparity)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // left
+            // 
+            this.left.Location = new System.Drawing.Point(18, 18);
+            this.left.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.left.Name = "left";
+            this.left.Size = new System.Drawing.Size(620, 240);
+            this.left.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.left.TabIndex = 0;
+            this.left.TabStop = false;
+            // 
+            // right
+            // 
+            this.right.Location = new System.Drawing.Point(646, 18);
+            this.right.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.right.Name = "right";
+            this.right.Size = new System.Drawing.Size(620, 240);
+            this.right.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.right.TabIndex = 1;
+            this.right.TabStop = false;
+            // 
+            // disparity
+            // 
+            this.disparity.Location = new System.Drawing.Point(18, 268);
+            this.disparity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.disparity.Name = "disparity";
+            this.disparity.Size = new System.Drawing.Size(620, 240);
+            this.disparity.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.disparity.TabIndex = 2;
+            this.disparity.TabStop = false;
+            // 
+            // ImageForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1280, 519);
+            this.Controls.Add(this.left);
+            this.Controls.Add(this.disparity);
+            this.Controls.Add(this.right);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Name = "ImageForm";
+            this.Text = "ImageForm";
+            ((System.ComponentModel.ISupportInitialize)(this.left)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.right)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.disparity)).EndInit();
+            this.ResumeLayout(false);
 
 		}
 

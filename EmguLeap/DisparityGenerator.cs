@@ -62,7 +62,7 @@ namespace EmguLeap
 			Console.WriteLine("{0} ms fo sgbm computation.", sw.ElapsedMilliseconds);
 
 			var res = disparityMap.Convert<Gray, byte>();
-			CvInvoke.cvLUT(res, res, Lut);
+			//CvInvoke.cvLUT(res, res, Lut);
 			return res.ToBitmap();
 
 		}

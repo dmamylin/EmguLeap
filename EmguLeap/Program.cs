@@ -8,7 +8,7 @@ namespace EmguLeap
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			var model = new DistanceModel();
+            var TestModel = new TestModel();
 			Application.Run();
 		}
 	}
